@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Codigo para viaulizar una imagen en un form
+Codigo para viaulizar una imagen en un form agregando un titulo
 """
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel
@@ -9,23 +9,32 @@ from PyQt5.QtGui import QIcon, QPixmap
 class App(QWidget):
  
     def __init__(self):
-        super().__init__()
-        self.title = 'PyQt5 Imagen'
-        self.left = 10
+        super().__init__(image=None, title='')
+        self.title = title #se utiliza para el titulo de la imagen
+        self.image = image
+        self.left = 10 
         self.top = 10
         self.width = 640
         self.height = 480
-        self.initUI()
+        self.initUI(self)
  
-    def initUI(self):
-        self.setWindowTitle(self.title)
+    def initUI(self, Form):
+        self.setWindowTitle(self.title) #establezco el titulo de la imagen
         self.setGeometry(self.left, self.top, self.width, self.height)
  
-        # Create widget
+        self.verticalLayout = QVBoxLayout(Form)      
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.labelTitle = QLabel(Form)
+        self.labelTitle.setObjectName("labelTitle")
+        self.labelTitle.setText(self.title) #establezco el titulo
+        self.labelTitle.setWordWrap(True) #para el caso de que sea muy largo hace un wordwrap
+        self.verticalLayout.addWidget(self.labelTitle)
+        # creo el widget para la imagen
         label = QLabel(self)
-        pixmap = QPixmap('image.jpeg')
+        pixmap = QPixmap(self.image)
         label.setPixmap(pixmap)
-        self.resize(pixmap.width(),pixmap.height())
+        self.verticalLayout.addWidget(label) #agrego la imagen al layout
+        self.resize(pixmap.width(),pixmap.height()+self.labelTitle.height()) #alto y ancho del form ajustado al tamaño de la imagen
  
         self.show()
  
