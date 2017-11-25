@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Codigo para viaulizar una imagen en un form agregando un titulo
+Codigo para visualizar una imagen en un form agregando un titulo
 """
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel
